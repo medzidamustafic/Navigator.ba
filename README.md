@@ -9,7 +9,7 @@
     
 ## Description
 
-In this repository Smoke test for Navigator.ba is automated using test automation tools described in Enviroment setup section.
+In this repository Smoke test for Navigator.ba is automated using test automation tools described in Environment setup section.
 
 Test script contains following test cases: 
 
