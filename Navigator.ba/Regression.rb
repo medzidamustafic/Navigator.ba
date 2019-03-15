@@ -48,10 +48,8 @@ RSpec.describe 'Regression test', type: :feature do
     execute_script("arguments[0].checked = true;", page.find("#poi_accepts_credit_cards", visible: false))
     find('#fileToUpload').native.send_keys('/home/emir/Desktop/image.jpg')
     find_button('Odaberite kategoriju').native.send_keys(:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab, :tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab, :tab, :tab, :tab, :tab, :tab, :tab)
-    sleep(3)
     find('#poi_comment').set('Proizvodi vrhunske kvalitete.')
     find_button("Kreiraj", visible: false).click
-    sleep(2)
     expect(page).to have_text "Biljna apoteka"
   end
 
