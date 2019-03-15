@@ -6,6 +6,7 @@ require 'capybara/selenium/extensions/scroll'
 
 Capybara.default_driver = :selenium_chrome
 Capybara.ignore_hidden_elements = false
+Capybara.javascript_driver = :selenium
 
 RSpec.describe 'Regression test', type: :feature do
 
@@ -25,13 +26,13 @@ RSpec.describe 'Regression test', type: :feature do
     fill_in 'poi_name', with: 'Biljna apoteka'
     fill_in "poi_city_name", with: 'Sarajevo'
     fill_in "poi_zip_code", with: '71000'
-    fill_in "poi_place_id", with: 'Aleja Lipa'
+    fill_in "poi_place_id", with: 'Grbavička'
+    find(:xpath, '//*[@id="place-form"]/div[1]/div[2]/div[3]/div[2]/span/span[2]/div/span', visible: false).click
     fill_in "poi_house_number", with: '33'
     fill_in "poi_description", with: 'Domaća biljna apoteka'
     find_button('Odaberite kategoriju').click
     find('.span3 option[value="11"]').select_option
     find('.span3 option[value="203"]').select_option
-    execute_script("arguments[0].scrollIntoView();", page.find('#working_hours_0_0', visible: false))
     execute_script("arguments[0].value='8';", page.find('#working_hours_0_0', visible: false))
     execute_script("arguments[0].value='16';", page.find('#working_hours_0_1', visible: false))
     execute_script("arguments[0].click();", page.find("button.btnAddWorkingHours", visible: false))
@@ -45,13 +46,16 @@ RSpec.describe 'Regression test', type: :feature do
     execute_script("arguments[0].value='apoteka123';", page.find('#poi_wifi_pass', visible: false))
     execute_script("arguments[0].value='Apoteka';", page.find('#poi_wifi_ssid', visible: false))
     execute_script("arguments[0].checked = true;", page.find("#poi_accepts_credit_cards", visible: false))
+    find('#fileToUpload').native.send_keys('/home/emir/Desktop/image.jpg')
     find_button('Odaberite kategoriju').native.send_keys(:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab, :tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab, :tab, :tab, :tab, :tab, :tab, :tab)
-    fill_in "poi_comment", with: 'Proizvodi vrhunske kvalitete.'
+    sleep(3)
+    find('#poi_comment').set('Proizvodi vrhunske kvalitete.')
     find_button("Kreiraj", visible: false).click
+    sleep(2)
     expect(page).to have_text "Biljna apoteka"
   end
 
-  xit 'create button disabled, exit input form, create with required fields' do
+  it 'create button disabled, exit input form, create with required fields' do
     find('#ember566').click
     find_button('Odaberite kategoriju').native.send_keys(:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab,:tab, :tab, :tab, :tab, :tab, :tab, :tab)
     find_button("Kreiraj", visible: false).click
