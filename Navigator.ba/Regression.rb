@@ -16,9 +16,9 @@ RSpec.describe 'Regression test', type: :feature do
 
   it 'zoom the map' do
     find('.leaflet-control-zoom-in').click
-    expect(page).to have_css("img[src*='11932.png")
+    expect(page).to have_link(href:'https://maps.wikimedia.org/osm-intl/15/18055/11932.png')
     find('.leaflet-control-zoom-out').click
-    expect(page).to have_css("img[src*='5966.png")
+    expect(page).to have_link(href:'https://maps.wikimedia.org/osm-intl/14/9027/5966.png')
   end
 
   it 'create place' do
@@ -196,10 +196,11 @@ RSpec.describe 'Regression test', type: :feature do
     fill_in "Traži ulicu ili objekat", with: 'Kulturalna asocijacija AMBROSIA'
     find('.iconav-search').click
     find('.mCSB_container').click
-    expect(page).to have_link 'http://www.ambrosia.ba/'
-    find('.empty').hover
-    execute_script("arguments[0].click();", page.find('[data-value="3"]'))
-    expect(page).to have_content('5 ocjena')
+    expect(page).to have_xpath('//*[@id="mCSB_4"]/div[1]/div[2]/div[2]/div[2]/div[1]')
+    expect(page).to have_content('6 ocjena')
+    find('.empty', visible:false).hover
+    execute_script("arguments[0].click();", page.find('.empty span[data-value="1"]', visible: false))
+    expect(page).to have_content('7 ocjena')
   end
 
   it 'event cards' do
