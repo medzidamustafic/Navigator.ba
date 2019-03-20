@@ -60,4 +60,4 @@ Test script contains following test cases:
           
 #### Run test script
 
-       Run test script by entering: `rspec Smoke_test.rb`
+       Run test script by entering: `rspec Smoke_test.rb`, `rspec Regression.rb`
