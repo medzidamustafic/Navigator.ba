@@ -26,8 +26,8 @@ RSpec.describe 'Regression test', type: :feature do
     fill_in 'poi_name', with: 'Biljna apoteka'
     fill_in "poi_city_name", with: 'Sarajevo'
     fill_in "poi_zip_code", with: '71000'
-    fill_in "poi_place_id", with: 'Grbavička'
-    find(:xpath, '//*[@id="place-form"]/div[1]/div[2]/div[3]/div[2]/span/span[2]/div/span', visible: false).click
+    fill_in "poi_place_id", with: 'Tuzlanska'
+    execute_script("arguments[0].setAttribute('style', 'margin-left: -12px; margin-top: -12px; transform: translate3d(200px, 180px, 0px); z-index: 180;');", page.find('.leaflet-marker-draggable'))
     fill_in "poi_house_number", with: '33'
     fill_in "poi_description", with: 'Domaća biljna apoteka'
     find_button('Odaberite kategoriju').click
